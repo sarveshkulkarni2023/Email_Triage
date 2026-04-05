@@ -1,0 +1,20 @@
+[
+  {
+    "task_id": "easy",
+    "error": "OPENAI_API_KEY environment variable is not set.",
+    "total_reward": 0.0,
+    "steps": 0
+  },
+  {
+    "task_id": "medium",
+    "error": "OPENAI_API_KEY environment variable is not set.",
+    "total_reward": 0.0,
+    "steps": 0
+  },
+  {
+    "task_id": "hard",
+    "error": "OPENAI_API_KEY environment variable is not set.",
+    "total_reward": 0.0,
+    "steps": 0
+  }
+]

@@ -1,0 +1,108 @@
+[
+  {
+    "email_id": "med-001",
+    "sender": "sarah.kim@example.com",
+    "subject": "Issue with recent charge",
+    "body": "Hi,\n\nI see a charge on my card that I don't recognize from your company. I'm not even sure I have an active subscription. Could this be fraud? I'm worried about my financial security.\n\nPlease look into this ASAP.\n\nSarah Kim",
+    "timestamp": "2025-03-16T08:00:00Z",
+    "thread_history": [],
+    "attachments": [],
+    "metadata": {"customer_tier": "unknown", "region": "US-East"},
+    "expected_classification": "billing",
+    "expected_priority": "high",
+    "expected_action": "request_info"
+  },
+  {
+    "email_id": "med-002",
+    "sender": "michael.brown@example.com",
+    "subject": "Frustrated with the service",
+    "body": "I've been a customer for 3 years and the quality has gone downhill. The app is slow, features I used to rely on are broken, and I'm considering switching to a competitor.\n\nI'm not sure if I want to cancel, complain about my last billing statement which was too high, or if there's something you can do to make this right. What are my options?",
+    "timestamp": "2025-03-16T09:15:00Z",
+    "thread_history": [],
+    "attachments": [],
+    "metadata": {"customer_tier": "premium", "region": "US-Central"},
+    "expected_classification": "feedback",
+    "expected_priority": "high",
+    "expected_action": "escalate"
+  },
+  {
+    "email_id": "med-003",
+    "sender": "jenny.nguyen@example.com",
+    "subject": "Data export not working",
+    "body": "The 'Export to CSV' button on the reports page does nothing when I click it. No error message, no download. I've tried Chrome and Firefox.\n\nIs this a known issue? Is there a workaround? I need this data for a board presentation tomorrow morning.",
+    "timestamp": "2025-03-16T10:30:00Z",
+    "thread_history": [],
+    "attachments": [],
+    "metadata": {"customer_tier": "enterprise", "region": "AP-Southeast"},
+    "expected_classification": "bug_report",
+    "expected_priority": "critical",
+    "expected_action": "respond"
+  },
+  {
+    "email_id": "med-004",
+    "sender": "alex.thompson@example.com",
+    "subject": "RE: Meeting follow-up",
+    "body": "Hey,\n\nThanks for the demo yesterday. I have a few questions:\n1. Does your API support webhooks?\n2. What's your uptime SLA?\n3. Can we get a custom integration for our CRM?\n\nAlso, there might be a security concern — one of our team members received a phishing email that looked like it came from your domain. Can you investigate?\n\nBest,\nAlex",
+    "timestamp": "2025-03-16T11:45:00Z",
+    "thread_history": [
+      "From: sales@ourcompany.com — Hi Alex, great meeting you! Let me know if you have questions."
+    ],
+    "attachments": ["phishing_screenshot.png"],
+    "metadata": {"customer_tier": "prospect", "region": "EU-West"},
+    "expected_classification": "security",
+    "expected_priority": "high",
+    "expected_action": "escalate"
+  },
+  {
+    "email_id": "med-005",
+    "sender": "priya.sharma@example.com",
+    "subject": "Compliance documentation request",
+    "body": "Hello,\n\nWe are undergoing a SOC 2 audit and need your latest Data Processing Agreement (DPA), security certifications, and information about your data residency options.\n\nCould you also clarify whether data stored in the EU region is ever transferred outside the EU?\n\nThis is time-sensitive — our auditors need this by end of week.\n\nRegards,\nPriya Sharma\nHead of Compliance, FinTech Global",
+    "timestamp": "2025-03-16T13:00:00Z",
+    "thread_history": [],
+    "attachments": [],
+    "metadata": {"customer_tier": "enterprise", "region": "EU-Central"},
+    "expected_classification": "compliance",
+    "expected_priority": "high",
+    "expected_action": "forward"
+  },
+  {
+    "email_id": "med-006",
+    "sender": "tom.wilson@example.com",
+    "subject": "Can't figure out integration",
+    "body": "I've been trying to set up the Zapier integration but the documentation seems outdated. The screenshots don't match what I see in the app.\n\nI also tried the API directly but kept getting 401 errors even with new API keys. Is my account plan limiting this? Or is my billing frozen?\n\nAt this point I don't know if it's a bug or if I'm doing something wrong. Help?",
+    "timestamp": "2025-03-16T14:30:00Z",
+    "thread_history": [],
+    "attachments": ["api_key_error.png"],
+    "metadata": {"customer_tier": "standard", "region": "US-West"},
+    "expected_classification": "technical_support",
+    "expected_priority": "medium",
+    "expected_action": "respond"
+  },
+  {
+    "email_id": "med-007",
+    "sender": "lisa.garcia@example.com",
+    "subject": "Account lockout after password change",
+    "body": "I changed my password 2 days ago through the app settings. Since then, I can log in on the web but the mobile app keeps saying 'session expired'. I've reinstalled the app twice already.\n\nI'm also seeing login attempts from an IP address I don't recognize in my security log. Is my account compromised?",
+    "timestamp": "2025-03-16T15:45:00Z",
+    "thread_history": [],
+    "attachments": ["security_log.pdf"],
+    "metadata": {"customer_tier": "premium", "region": "US-East"},
+    "expected_classification": "security",
+    "expected_priority": "critical",
+    "expected_action": "escalate"
+  },
+  {
+    "email_id": "med-008",
+    "sender": "mark.davis@example.com",
+    "subject": "Upgrade pricing question",
+    "body": "Hi,\n\nI'm on the Basic plan and thinking about upgrading but your pricing page shows different rates than what I was quoted by your sales team last month.\n\nAlso, if I upgrade mid-cycle, will I lose my current data or settings? I've heavily customized my dashboard and don't want to start over.\n\nLastly, do you offer nonprofit discounts? We're a registered 501(c)(3).\n\nThanks,\nMark",
+    "timestamp": "2025-03-16T16:30:00Z",
+    "thread_history": [],
+    "attachments": [],
+    "metadata": {"customer_tier": "standard", "region": "US-Central"},
+    "expected_classification": "billing",
+    "expected_priority": "medium",
+    "expected_action": "respond"
+  }
+]

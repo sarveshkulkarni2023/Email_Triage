@@ -1,0 +1,148 @@
+[
+  {
+    "email_id": "hard-001",
+    "sender": "cto@megacorp.io",
+    "subject": "Urgent: Production outage affecting 10k+ users",
+    "body": "Our entire fleet of microservices that depend on your API have been down for the past 45 minutes. We're getting 503 errors across all endpoints. This is affecting over 10,000 end users and we're losing approximately $5,000 per minute in revenue.\n\nOur status page still shows 'All Systems Operational' which is clearly wrong. We need:\n1. Immediate acknowledgment and an ETA for resolution\n2. A root cause analysis within 24 hours\n3. Discussion about SLA credits given our Enterprise agreement\n\nI'm escalating this to our CEO if we don't hear back within 15 minutes.\n\nRaj Patel\nCTO, MegaCorp",
+    "timestamp": "2025-03-17T03:15:00Z",
+    "thread_history": [],
+    "attachments": ["error_traces.json", "monitoring_dashboard.png"],
+    "metadata": {
+      "customer_tier": "enterprise",
+      "region": "US-East",
+      "annual_contract_value": 250000,
+      "active_users": 10500
+    },
+    "expected_classification": "technical_support",
+    "expected_priority": "critical",
+    "expected_action": "escalate",
+    "response_guidelines": "Acknowledge the severity immediately. Apologize for the impact. Confirm that the engineering team has been alerted. Provide a realistic ETA or state that one will follow within 30 minutes. Reference the Enterprise SLA and assure that credits will be evaluated. Do NOT make promises about root cause timeline that cannot be kept. Tone should be professional, empathetic, and urgent.",
+    "grading_rubric": {
+      "must_include": ["acknowledgment of severity", "apology", "engineering team notification", "SLA reference"],
+      "must_not_include": ["dismissive language", "blame the customer", "generic template response"],
+      "tone": "professional, empathetic, urgent"
+    }
+  },
+  {
+    "email_id": "hard-002",
+    "sender": "maria.gonzalez@lawfirm.com",
+    "subject": "Data Subject Access Request (GDPR Article 15)",
+    "body": "Dear Data Protection Officer,\n\nPursuant to Article 15 of the General Data Protection Regulation (GDPR), I am hereby exercising my right of access. Please provide me with:\n\n1. Confirmation of whether you process my personal data\n2. A copy of all personal data you hold about me\n3. The purposes of processing\n4. The categories of personal data concerned\n5. The recipients to whom data has been disclosed\n6. The retention period\n7. Information about automated decision-making, including profiling\n\nPlease also note that my client, Mr. Hans Weber (account hans.weber@example.com), has authorized me to submit this request on his behalf. Authorization letter attached.\n\nYou have 30 days to respond per GDPR requirements. Failure to comply may result in a complaint to the relevant supervisory authority.\n\nRegards,\nMaria Gonzalez, Esq.\nPartner, Gonzalez & Associates",
+    "timestamp": "2025-03-17T09:00:00Z",
+    "thread_history": [],
+    "attachments": ["authorization_letter.pdf", "id_verification.pdf"],
+    "metadata": {
+      "customer_tier": "standard",
+      "region": "EU-West",
+      "legal_request": true
+    },
+    "expected_classification": "compliance",
+    "expected_priority": "critical",
+    "expected_action": "forward",
+    "response_guidelines": "Acknowledge receipt of the DSAR. Confirm the 30-day response window. State that the request is being forwarded to the Data Protection Officer and legal team. Request any additional verification if needed but do NOT delay acknowledgment. Do NOT provide any data in this initial response. Tone should be formal and legally precise.",
+    "grading_rubric": {
+      "must_include": ["DSAR acknowledgment", "30-day timeline reference", "DPO/legal team forwarding", "formal tone"],
+      "must_not_include": ["actual personal data", "casual language", "commitments beyond legal requirements"],
+      "tone": "formal, precise, legally compliant"
+    }
+  },
+  {
+    "email_id": "hard-003",
+    "sender": "whistleblower@protonmail.com",
+    "subject": "Security vulnerability disclosure",
+    "body": "I've discovered a critical security vulnerability in your application that allows unauthorized access to other users' accounts through a manipulated JWT token. Steps to reproduce:\n\n1. Log into any account\n2. Decode the JWT from the Authorization header\n3. Change the 'sub' field to any other user ID\n4. Re-encode (the signature is not validated server-side)\n5. Use the modified token — you now have full access to the other account\n\nI've verified this works on your production environment. I have NOT accessed any real user data beyond confirming the vulnerability exists.\n\nI'm giving you 72 hours to acknowledge this before I disclose publicly. I'm a security researcher and would appreciate recognition under your bug bounty program if you have one.\n\nRegards,\nA concerned researcher",
+    "timestamp": "2025-03-17T11:30:00Z",
+    "thread_history": [],
+    "attachments": [],
+    "metadata": {
+      "customer_tier": "unknown",
+      "region": "unknown",
+      "sender_verified": false
+    },
+    "expected_classification": "security",
+    "expected_priority": "critical",
+    "expected_action": "escalate",
+    "response_guidelines": "Thank the researcher for the responsible disclosure. Acknowledge the report has been received and is being treated with the highest priority. Confirm the security team has been notified. Reference the bug bounty program (or commitment to fair recognition). Request the researcher refrain from public disclosure and provide a more specific timeline. Do NOT confirm or deny the vulnerability exists in the response. Tone should be appreciative, professional, and security-conscious.",
+    "grading_rubric": {
+      "must_include": ["thanks for disclosure", "security team notification", "request to delay public disclosure", "bug bounty reference"],
+      "must_not_include": ["confirmation of vulnerability", "technical details", "dismissive language"],
+      "tone": "appreciative, professional, security-conscious"
+    }
+  },
+  {
+    "email_id": "hard-004",
+    "sender": "emily.foster@healthtech.org",
+    "subject": "RE: RE: Patient data sync failures — HIPAA concern",
+    "body": "This is now the THIRD time I'm following up on this issue.\n\nOur patient records sync has been failing intermittently for 2 weeks. Given that we're a healthcare provider, this potentially constitutes a HIPAA violation if patient data is being lost or corrupted during transmission.\n\nI've attached the error logs showing 47 failed sync attempts. Each represents a patient record that may be in an inconsistent state between our systems.\n\nWe need:\n1. Immediate confirmation that no PHI has been exposed or lost\n2. A technical fix deployed within 48 hours\n3. A formal incident report for our compliance team\n4. Assurance that your platform maintains HIPAA BAA compliance\n\nIf I don't hear back with a concrete action plan today, we will be forced to suspend our integration and notify HHS as a precautionary measure.\n\nEmily Foster\nDirector of Health IT, HealthTech Solutions",
+    "timestamp": "2025-03-17T14:00:00Z",
+    "thread_history": [
+      "From: emily.foster@healthtech.org — First report of sync failures, 2 weeks ago.",
+      "From: support@ourcompany.com — We're looking into it. — 10 days ago.",
+      "From: emily.foster@healthtech.org — Following up, still broken. — 5 days ago."
+    ],
+    "attachments": ["sync_error_logs.csv", "hipaa_baa_agreement.pdf"],
+    "metadata": {
+      "customer_tier": "enterprise",
+      "region": "US-East",
+      "industry": "healthcare",
+      "hipaa_regulated": true
+    },
+    "expected_classification": "technical_support",
+    "expected_priority": "critical",
+    "expected_action": "escalate",
+    "response_guidelines": "Apologize sincerely for the delayed response and ongoing issue. Acknowledge the HIPAA compliance concern explicitly. Confirm that an investigation into data integrity is underway and that no PHI exposure has been detected (if true). Commit to specific next steps with timelines. Mention the incident report. Reference the BAA. Escalate to a senior technical lead and compliance officer. Tone must be serious, empathetic, and action-oriented.",
+    "grading_rubric": {
+      "must_include": ["apology for delays", "HIPAA acknowledgment", "data integrity assurance", "specific timelines", "escalation commitment"],
+      "must_not_include": ["generic 'we are looking into it'", "blame the customer", "vague promises"],
+      "tone": "serious, empathetic, action-oriented"
+    }
+  },
+  {
+    "email_id": "hard-005",
+    "sender": "james.morrison@bigretail.com",
+    "subject": "Cancellation and data deletion request",
+    "body": "Hi,\n\nAfter 5 years as an Enterprise customer, we've decided to move to a competitor. Please process the following:\n\n1. Cancel our Enterprise subscription (Account #BR-58291) effective end of current billing cycle\n2. Export ALL our data in a machine-readable format (JSON preferred)\n3. After export confirmation, permanently delete all our data from your systems\n4. Provide written confirmation of deletion\n\nWe also need clarification on:\n- What happens to our API integrations during the transition period?\n- Are there any early termination fees? Our contract renewal was last month.\n- Can we retain read-only access for 60 days during migration?\n\nI've CC'd our legal team on this email.\n\nRegards,\nJames Morrison\nVP of Technology, BigRetail Inc.",
+    "timestamp": "2025-03-17T16:00:00Z",
+    "thread_history": [],
+    "attachments": [],
+    "metadata": {
+      "customer_tier": "enterprise",
+      "region": "US-West",
+      "annual_contract_value": 180000,
+      "tenure_years": 5
+    },
+    "expected_classification": "cancellation",
+    "expected_priority": "high",
+    "expected_action": "escalate",
+    "response_guidelines": "Acknowledge the cancellation request professionally. Express regret about the departure without being pushy about retention. Confirm you understand all four requirements (cancel, export, delete, written confirmation). Address each clarification question. Mention that account management and legal teams will be involved. Provide a realistic timeline for the data export. Tone should be professional, respectful, and helpful despite the cancellation.",
+    "grading_rubric": {
+      "must_include": ["acknowledgment of all 4 requests", "address clarification questions", "timeline for data export", "team involvement"],
+      "must_not_include": ["aggressive retention tactics", "guilt-tripping", "ignoring any of the requests"],
+      "tone": "professional, respectful, helpful"
+    }
+  },
+  {
+    "email_id": "hard-006",
+    "sender": "support-bot@partnercompany.com",
+    "subject": "Automated: Integration health check failure",
+    "body": "AUTOMATED ALERT\n\nIntegration ID: INT-7823\nPartner: PartnerCompany\nStatus: DEGRADED\n\nThe following health check failures have been detected:\n- Authentication endpoint: TIMEOUT (>30s)\n- Data sync endpoint: 429 TOO MANY REQUESTS\n- Webhook delivery: 3/10 failed (30% failure rate)\n\nLast successful full sync: 2025-03-16T22:00:00Z (17 hours ago)\nAffected data records: ~2,300\n\nThis is an automated notification. For manual follow-up, contact: ops@partnercompany.com\n\nNote: Our SLA requires 99.9% uptime. Current 7-day uptime: 97.2%",
+    "timestamp": "2025-03-17T15:00:00Z",
+    "thread_history": [],
+    "attachments": [],
+    "metadata": {
+      "customer_tier": "partner",
+      "region": "US-East",
+      "automated": true,
+      "integration_type": "bi-directional_sync"
+    },
+    "expected_classification": "technical_support",
+    "expected_priority": "high",
+    "expected_action": "respond",
+    "response_guidelines": "Acknowledge the automated alert. Confirm that the engineering team is investigating the health check failures. Address each failure point (auth timeout, rate limiting, webhook failures). Provide a plan to restore the sync. Reference the SLA and commit to an uptime improvement plan. Direct the response to ops@partnercompany.com. Tone should be technical, concise, and action-oriented.",
+    "grading_rubric": {
+      "must_include": ["acknowledgment of each failure", "engineering investigation", "SLA reference", "restoration plan"],
+      "must_not_include": ["blame partner", "ignore any failure point", "generic acknowledgment"],
+      "tone": "technical, concise, action-oriented"
+    }
+  }
+]

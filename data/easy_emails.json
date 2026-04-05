@@ -1,0 +1,98 @@
+[
+  {
+    "email_id": "easy-001",
+    "sender": "alice.johnson@example.com",
+    "subject": "Cannot access my account",
+    "body": "Hi Support,\n\nI have been trying to log into my account since this morning but keep getting an 'Invalid credentials' error. I'm sure my password is correct. Can you please help me regain access?\n\nThanks,\nAlice",
+    "timestamp": "2025-03-15T09:12:00Z",
+    "thread_history": [],
+    "attachments": [],
+    "metadata": {"customer_tier": "standard", "region": "US-East"},
+    "expected_classification": "account_access",
+    "expected_priority": "high"
+  },
+  {
+    "email_id": "easy-002",
+    "sender": "bob.martinez@example.com",
+    "subject": "Billing discrepancy on invoice #4821",
+    "body": "Hello,\n\nI noticed a charge of $49.99 on my latest invoice (#4821), but I'm on the $29.99 plan. Could you please review and correct this?\n\nBest regards,\nBob Martinez",
+    "timestamp": "2025-03-15T10:30:00Z",
+    "thread_history": [],
+    "attachments": ["invoice_4821.pdf"],
+    "metadata": {"customer_tier": "premium", "region": "US-West"},
+    "expected_classification": "billing",
+    "expected_priority": "medium"
+  },
+  {
+    "email_id": "easy-003",
+    "sender": "carlos.rivera@example.com",
+    "subject": "Request for dark mode feature",
+    "body": "Hey team,\n\nJust wanted to suggest adding a dark mode to the dashboard. It would be much easier on the eyes during late-night sessions.\n\nCheers,\nCarlos",
+    "timestamp": "2025-03-15T11:00:00Z",
+    "thread_history": [],
+    "attachments": [],
+    "metadata": {"customer_tier": "standard", "region": "EU-West"},
+    "expected_classification": "feature_request",
+    "expected_priority": "low"
+  },
+  {
+    "email_id": "easy-004",
+    "sender": "diana.chen@example.com",
+    "subject": "App crashes when uploading images",
+    "body": "Hi,\n\nThe mobile app (v3.2.1, Android 14) crashes every time I try to upload an image larger than 5 MB. Smaller files work fine.\n\nPlease fix — it's blocking my workflow.\n\nThanks,\nDiana",
+    "timestamp": "2025-03-15T12:15:00Z",
+    "thread_history": [],
+    "attachments": ["crash_log.txt"],
+    "metadata": {"customer_tier": "enterprise", "region": "AP-Southeast"},
+    "expected_classification": "bug_report",
+    "expected_priority": "high"
+  },
+  {
+    "email_id": "easy-005",
+    "sender": "evan.wright@example.com",
+    "subject": "Great product, but one suggestion",
+    "body": "Just wanted to share that I love the analytics dashboard — it's been incredibly useful. One minor suggestion: it would be great if we could export reports as CSV files.\n\nKeep up the great work!\nEvan",
+    "timestamp": "2025-03-15T13:00:00Z",
+    "thread_history": [],
+    "attachments": [],
+    "metadata": {"customer_tier": "standard", "region": "US-Central"},
+    "expected_classification": "feedback",
+    "expected_priority": "low"
+  },
+  {
+    "email_id": "easy-006",
+    "sender": "fatima.hussain@example.com",
+    "subject": "How do I add team members?",
+    "body": "Hello Support,\n\nI just upgraded to the Team plan but cannot figure out how to invite new members. Where is this option?\n\nRegards,\nFatima",
+    "timestamp": "2025-03-15T14:20:00Z",
+    "thread_history": [],
+    "attachments": [],
+    "metadata": {"customer_tier": "premium", "region": "ME-Central"},
+    "expected_classification": "general_inquiry",
+    "expected_priority": "medium"
+  },
+  {
+    "email_id": "easy-007",
+    "sender": "george.patel@example.com",
+    "subject": "I want to cancel my subscription",
+    "body": "Hi,\n\nPlease cancel my subscription effective immediately. I no longer need the service.\n\nThank you,\nGeorge Patel\nAccount #GP-29384",
+    "timestamp": "2025-03-15T15:45:00Z",
+    "thread_history": [],
+    "attachments": [],
+    "metadata": {"customer_tier": "standard", "region": "US-East"},
+    "expected_classification": "cancellation",
+    "expected_priority": "medium"
+  },
+  {
+    "email_id": "easy-008",
+    "sender": "hannah.lee@example.com",
+    "subject": "API returns 500 errors intermittently",
+    "body": "Our integration has been getting intermittent 500 errors from your /api/v2/data endpoint for the past 2 hours. We've attached our request logs.\n\nThis is affecting production. Please investigate urgently.\n\nHannah Lee\nSenior Developer, DataSync Inc.",
+    "timestamp": "2025-03-15T16:30:00Z",
+    "thread_history": [],
+    "attachments": ["api_error_logs.json"],
+    "metadata": {"customer_tier": "enterprise", "region": "US-West"},
+    "expected_classification": "technical_support",
+    "expected_priority": "critical"
+  }
+]

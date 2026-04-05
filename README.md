@@ -1,3 +1,13 @@
+---
+title: Email Triage RL System
+emoji: 🤖
+colorFrom: blue
+colorTo: purple
+sdk: docker
+app_file: app.py
+pinned: false
+---
+
 # 📧 AI Email Triage & Response System — OpenEnv Environment
 
 An **OpenEnv-compliant** reinforcement-learning environment that simulates a real-world customer-support email inbox. Agents must classify, prioritize, decide on actions, and optionally draft professional responses for incoming emails.
@@ -417,16 +427,3 @@ pytest tests/ -v --cov=. --cov-report=term-missing
 ## 📄 License
 
 MIT
-=======
----
-title: Email Triage
-emoji: 🏆
-colorFrom: pink
-colorTo: purple
-sdk: docker
-pinned: false
-license: mit
----
-
-Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
->>>>>>> 63adf57df18b1d82120def0f18b3317655f199ec

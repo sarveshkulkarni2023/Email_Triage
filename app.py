@@ -105,8 +105,10 @@ class HealthResponse(BaseModel):
 
 
 @app.post("/reset", response_model=ResetResponse, tags=["Environment"])
-def reset_endpoint(request: ResetRequest) -> ResetResponse:
+def reset_endpoint(request: Optional[ResetRequest] = None) -> ResetResponse:
     """Reset the environment and return the initial observation."""
+    if request is None:
+        request = ResetRequest()
     try:
         observation = env.reset(task_id=request.task_id, seed=request.seed)
         return ResetResponse(observation=observation)
@@ -118,8 +120,10 @@ def reset_endpoint(request: ResetRequest) -> ResetResponse:
 
 
 @app.post("/step", response_model=StepResponse, tags=["Environment"])
-def step_endpoint(request: StepRequest) -> StepResponse:
+def step_endpoint(request: Optional[StepRequest] = None) -> StepResponse:
     """Submit an agent action and receive the next observation."""
+    if request is None:
+        request = StepRequest()
     try:
         action_dict = request.model_dump(exclude_none=True)
         obs, reward, done, info = env.step(action_dict)

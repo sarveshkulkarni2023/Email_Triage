@@ -188,11 +188,11 @@ class EmailTriageEnv:
         logger.info(
             "step=%d reward=%.4f done=%s",
             self._state_manager.step_number,
-            final_reward,
+            incremental_reward,
             done,
         )
 
-        return obs, round(final_reward, 4), done, info
+        return obs, round(incremental_reward, 4), done, info
 
     # ------------------------------------------------------------------ #
     # state

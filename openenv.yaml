@@ -9,7 +9,7 @@ description: >
 
 type: space
 runtime: fastapi
-app: app:app
+app: server.app:app
 port: 7860
 
 tasks:

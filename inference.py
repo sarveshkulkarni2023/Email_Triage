@@ -75,11 +75,11 @@ def evaluate_task(env: EmailTriageEnv, agent: BaselineAgent, task_id: str, seed:
             next_obs, reward, done, info = env.step(action)
             total_reward += reward
             
-            # 3. Emit exact STEP format
+            # 3. Emit exact STEP format — reward normalized to (0, 1)
             step_payload = {
                 "step": step,
                 "action": action,
-                "reward": reward,
+                "reward": round(_normalize_score(reward), 8),
                 "stage": obs.get("current_stage", "unknown"),
                 "details": info.get("details", "")
             }
@@ -89,19 +89,18 @@ def evaluate_task(env: EmailTriageEnv, agent: BaselineAgent, task_id: str, seed:
             step += 1
             
         except Exception as e:
-            err_payload = {"step": step, "error": str(e), "reward": 0.0}
+            err_payload = {"step": step, "error": str(e), "reward": round(_SCORE_EPS, 8)}
             print(f"[STEP] {safe_json(err_payload)}")
             break
 
-    # Normalize the accumulated reward to the open interval (0, 1) as
-    # required by OpenEnv Phase 2 validation (strict inequalities).
+    # Normalize to the open interval (0, 1) — required by OpenEnv Phase 2.
+    # Only emit `score`; do NOT include raw total_reward which can be <= 0.
     task_score = _normalize_score(total_reward)
 
     # END format block
     end_payload = {
         "task_id": task_id,
-        "score": round(task_score, 8),      # Primary field checked by validator
-        "total_reward": round(total_reward, 4),  # Raw value kept for debugging
+        "score": round(task_score, 8),
         "steps_taken": step
     }
     print(f"[END] {safe_json(end_payload)}")

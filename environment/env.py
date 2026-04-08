@@ -22,11 +22,19 @@ from environment.constants import (
 from environment.state_manager import StateManager
 from graders.base_grader import BaseGrader
 from graders.llm_grader import LLMGrader
-from graders.rule_based import RuleBasedGrader
+from graders.rule_based import RuleBasedGrader, _SCORE_EPS
 from models.action import Action
 from models.observation import Observation
 
 logger = logging.getLogger(__name__)
+
+_SCORE_EPS_ENV: float = _SCORE_EPS  # re-export for clarity
+
+
+def _norm(raw: float) -> float:
+    """Clamp any raw reward to the open interval (0, 1)."""
+    clamped = max(0.0, min(1.0, raw))
+    return _SCORE_EPS_ENV + clamped * (1.0 - 2 * _SCORE_EPS_ENV)
 
 # ------------------------------------------------------------------ #
 # Task registry
@@ -178,10 +186,10 @@ class EmailTriageEnv:
         )
 
         info = {
-            "incremental_reward": round(incremental_reward, 4),
+            "incremental_reward": round(_norm(incremental_reward), 8),
             "stage_advanced": advanced,
-            "accumulated_reward": round(self._state_manager.accumulated_reward, 4),
-            "episode_rewards": [round(r, 4) for r in self._episode_rewards],
+            "accumulated_reward": round(_norm(self._state_manager.accumulated_reward), 8),
+            "episode_rewards": [round(_norm(r), 8) for r in self._episode_rewards],
             "details": details
         }
 
@@ -192,7 +200,7 @@ class EmailTriageEnv:
             done,
         )
 
-        return obs, round(incremental_reward, 4), done, info
+        return obs, round(_norm(incremental_reward), 8), done, info
 
     # ------------------------------------------------------------------ #
     # state
@@ -216,5 +224,5 @@ class EmailTriageEnv:
             "remaining_steps": 0,
             "feedback": "Episode complete.",
             "terminal": True,
-            "accumulated_reward": round(self._state_manager.accumulated_reward, 4),
+            "accumulated_reward": round(_norm(self._state_manager.accumulated_reward), 8),
         }

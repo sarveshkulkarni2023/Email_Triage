@@ -2,6 +2,10 @@
 Mandatory inference script for automated pre-submission evaluation.
 This script utilizes the BaselineAgent against the environment and outputs strictly
 formatted stdout logs ([START], [STEP], [END]) required by the hackathon organizers.
+
+Note: `score` in [END] is always strictly in (0, 1) as required by OpenEnv Phase 2
+validation. It is computed by clamping the accumulated reward to [0, 1] and then
+remapping with a small epsilon so exact boundary values are never emitted.
 """
 
 import os
@@ -26,6 +30,22 @@ def safe_json(data: Dict[str, Any]) -> str:
         return json.dumps(data, default=str)
     except Exception:
         return "{}"
+
+
+_SCORE_EPS: float = 1e-6  # Minimum distance from 0 / 1 for task scores
+
+
+def _normalize_score(raw_reward: float) -> float:
+    """Map an arbitrary accumulated reward into the open interval (0, 1).
+
+    OpenEnv Phase 2 requires each task score to satisfy 0 < score < 1
+    (strict inequalities).  The environment's accumulated reward can be
+    negative (heavy penalties) or theoretically reach 1.0, so we:
+      1. Clamp to [0, 1].
+      2. Remap from [0, 1] → [eps, 1-eps] via linear interpolation.
+    """
+    clamped = max(0.0, min(1.0, raw_reward))
+    return _SCORE_EPS + clamped * (1.0 - 2 * _SCORE_EPS)
 
 
 def evaluate_task(env: EmailTriageEnv, agent: BaselineAgent, task_id: str, seed: int = 42) -> None:
@@ -73,10 +93,15 @@ def evaluate_task(env: EmailTriageEnv, agent: BaselineAgent, task_id: str, seed:
             print(f"[STEP] {safe_json(err_payload)}")
             break
 
+    # Normalize the accumulated reward to the open interval (0, 1) as
+    # required by OpenEnv Phase 2 validation (strict inequalities).
+    task_score = _normalize_score(total_reward)
+
     # END format block
     end_payload = {
         "task_id": task_id,
-        "total_reward": total_reward,
+        "score": round(task_score, 8),      # Primary field checked by validator
+        "total_reward": round(total_reward, 4),  # Raw value kept for debugging
         "steps_taken": step
     }
     print(f"[END] {safe_json(end_payload)}")

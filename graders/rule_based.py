@@ -13,6 +13,12 @@ from environment.constants import PENALTY_WRONG_ACTION
 from graders.base_grader import BaseGrader
 from models.action import Action
 
+_SCORE_EPS: float = 1e-6  # Scores must satisfy 0 < score < 1 (strict)
+
+
+def _clip(score: float) -> float:
+    """Clamp a raw score to the open interval (0, 1) as required by OpenEnv."""
+    return max(_SCORE_EPS, min(1.0 - _SCORE_EPS, score))
 
 class RuleBasedGrader(BaseGrader):
     """Deterministic, rule-based grader for multi-stage MDP."""
@@ -20,18 +26,18 @@ class RuleBasedGrader(BaseGrader):
     def grade_classification(self, action: Action, ground_truth: Dict[str, Any], weight: float) -> float:
         expected_cls = ground_truth.get("classification")
         if not expected_cls:
-            return weight  # No ground truth means default to full credit
+            return _clip(weight)  # No ground truth means default to full credit
             
         cls_score = 1.0 if (
             action.classification is not None
             and action.classification.value == expected_cls
         ) else 0.0
-        return cls_score * weight
+        return _clip(cls_score * weight)
 
     def grade_priority(self, action: Action, ground_truth: Dict[str, Any], weight: float) -> float:
         expected_pri = ground_truth.get("priority")
         if not expected_pri:
-            return weight
+            return _clip(weight)
 
         pri_score = 1.0 if (
             action.priority is not None
@@ -51,22 +57,22 @@ class RuleBasedGrader(BaseGrader):
             except ValueError:
                 pass
 
-        return pri_score * weight
+        return _clip(pri_score * weight)
 
     def grade_action(self, action: Action, ground_truth: Dict[str, Any], weight: float) -> float:
         expected_act = ground_truth.get("action")
         
         if expected_act is not None:
             if action.action is not None and action.action.value == expected_act:
-                return 1.0 * weight
+                return _clip(1.0 * weight)
             else:
                 # Wrong action, applies penalty instead of positive reward later
-                return 0.0
+                return _SCORE_EPS
         else:
             # No expected action (easy tasks) — any reasonable action is fine
-            return 1.0 * weight if action.action is not None else 0.0
+            return _clip(1.0 * weight) if action.action is not None else _SCORE_EPS
 
     def grade_response(self, action: Action, ground_truth: Dict[str, Any], email_body: str, weight: float) -> float:
         # Rule-based grader does not formally grade free text responses
-        # Returns 0; meant to be overridden or skipped.
-        return 0.0
+        # Returns minimum score; meant to be overridden or skipped.
+        return _SCORE_EPS

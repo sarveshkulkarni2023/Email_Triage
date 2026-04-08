@@ -14,7 +14,7 @@ import logging
 from typing import Any, Dict, Optional
 
 from environment.constants import LLM_RESPONSE_WEIGHTS
-from graders.rule_based import RuleBasedGrader
+from graders.rule_based import RuleBasedGrader, _SCORE_EPS, _clip
 from models.action import Action
 
 logger = logging.getLogger(__name__)
@@ -31,7 +31,7 @@ def _heuristic_response_score(
     in ``[0, 1]``.
     """
     if not response_text:
-        return {"relevance": 0.0, "correctness": 0.0, "completeness": 0.0}
+        return {"relevance": _SCORE_EPS, "correctness": _SCORE_EPS, "completeness": _SCORE_EPS}
     if not guidelines:
         # No guidelines to compare against → give benefit of the doubt
         return {"relevance": 0.5, "correctness": 0.5, "completeness": 0.5}
@@ -46,9 +46,9 @@ def _heuristic_response_score(
     recall = overlap / len(guideline_words)
     precision = overlap / len(response_words) if response_words else 0.0
 
-    relevance = min(1.0, precision * 2)
-    completeness = min(1.0, recall)
-    correctness = min(1.0, (relevance + completeness) / 2)
+    relevance = min(1.0 - _SCORE_EPS, max(_SCORE_EPS, precision * 2))
+    completeness = min(1.0 - _SCORE_EPS, max(_SCORE_EPS, recall))
+    correctness = min(1.0 - _SCORE_EPS, max(_SCORE_EPS, (relevance + completeness) / 2))
 
     return {
         "relevance": round(relevance, 4),
@@ -63,15 +63,15 @@ class LLMGrader(RuleBasedGrader):
     def grade_response(self, action: Action, ground_truth: Dict[str, Any], email_body: str, weight: float) -> float:
         response_text = action.response_text
         if not response_text:
-            return 0.0
+            return _SCORE_EPS
 
         guidelines = ground_truth.get("response_guidelines")
         rubric = ground_truth.get("grading_rubric")
         
         scores = self._llm_evaluate_response(response_text, email_body, guidelines, rubric)
         
-        raw_llm = sum(scores[criteria] * weight for criteria, weight in LLM_RESPONSE_WEIGHTS.items())
-        return raw_llm * weight
+        raw_llm = sum(scores[criteria] * w for criteria, w in LLM_RESPONSE_WEIGHTS.items())
+        return _clip(raw_llm * weight)
 
     def _llm_evaluate_response(
         self,
@@ -123,9 +123,9 @@ class LLMGrader(RuleBasedGrader):
             result = json.loads(content)
             
             return {
-                "relevance": float(result.get("relevance", 0.0)),
-                "correctness": float(result.get("correctness", 0.0)),
-                "completeness": float(result.get("completeness", 0.0)),
+                "relevance": _clip(float(result.get("relevance", 0.5))),
+                "correctness": _clip(float(result.get("correctness", 0.5))),
+                "completeness": _clip(float(result.get("completeness", 0.5))),
             }
         except Exception as exc:
             logger.exception("LLM grading failed. Falling back to heuristic.")
